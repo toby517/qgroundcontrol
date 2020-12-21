@@ -197,7 +197,8 @@ void MAVLinkProtocol::receiveBytes(LinkInterface* link, QByteArray b)
     // Since receiveBytes signals cross threads we can end up with signals in the queue
     // that come through after the link is disconnected. For these we just drop the data
     // since the link is closed.
-    if (!_linkMgr->containsLink(link)) {
+    WeakLinkInterfacePtr linkPtr = _linkMgr->sharedLinkInterfacePointerForLink(link);
+    if (linkPtr.expired()) {
         return;
     }
 
@@ -362,6 +363,10 @@ void MAVLinkProtocol::receiveBytes(LinkInterface* link, QByteArray b)
             // Reset message parsing
             memset(&_status,  0, sizeof(_status));
             memset(&_message, 0, sizeof(_message));
+
+            if (linkPtr.expired()) {
+                break;
+            }
         }
     }
 }

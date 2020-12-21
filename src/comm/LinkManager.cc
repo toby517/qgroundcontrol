@@ -220,7 +220,7 @@ SharedLinkInterfacePtr LinkManager::sharedLinkInterfacePointerForLink(LinkInterf
         }
     }
 
-    qWarning() << "LinkManager::sharedLinkInterfaceForLink returning nullptr";
+    qDebug(LinkManagerLog) << "LinkManager::sharedLinkInterfaceForLink returning nullptr";
     return SharedLinkInterfacePtr(nullptr);
 }
 
