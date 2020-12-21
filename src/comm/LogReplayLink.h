@@ -55,7 +55,8 @@ class LogReplayLink : public LinkInterface
     friend class LinkManager;
 
 public:
-    ~LogReplayLink();
+    LogReplayLink(SharedLinkConfigurationPtr& config);
+    virtual ~LogReplayLink();
 
     /// @return true: log is currently playing, false: log playback is paused
     bool isPlaying(void) { return _readTickTimer.isActive(); }
@@ -96,8 +97,6 @@ private slots:
     void _setPlaybackSpeed  (qreal playbackSpeed);
 
 private:
-    // Links are only created/destroyed by LinkManager so constructor/destructor is not public
-    LogReplayLink(SharedLinkConfigurationPtr& config);
 
     // LinkInterface overrides
     bool _connect(void) override;

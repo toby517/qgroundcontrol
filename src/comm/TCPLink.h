@@ -75,7 +75,8 @@ class TCPLink : public LinkInterface
     friend class LinkManager;
 
 public:
-    ~TCPLink();
+    TCPLink(SharedLinkConfigurationPtr& config);
+    virtual ~TCPLink();
 
     QTcpSocket* getSocket           (void) { return _socket; }
     void        signalBytesWritten  (void);
@@ -101,7 +102,6 @@ private slots:
     void _writeBytes(const QByteArray data) override;
 
 private:
-    TCPLink(SharedLinkConfigurationPtr& config);
 
     // LinkInterface overrides
     bool _connect(void) override;

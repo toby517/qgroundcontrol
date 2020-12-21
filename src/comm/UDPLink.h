@@ -100,7 +100,8 @@ class UDPLink : public LinkInterface
     friend class LinkManager;
 
 public:
-    ~UDPLink();
+    UDPLink(SharedLinkConfigurationPtr& config);
+    virtual ~UDPLink();
 
     // LinkInterface overrides
     bool isConnected(void) const override;
@@ -117,8 +118,6 @@ private slots:
     void _writeBytes(const QByteArray data) override;
 
 private:
-    // Links are only created/destroyed by LinkManager so constructor/destructor is not public
-    UDPLink(SharedLinkConfigurationPtr& config);
 
     // LinkInterface overrides
     bool _connect(void) override;

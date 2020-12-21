@@ -123,7 +123,8 @@ class BluetoothLink : public LinkInterface
     friend class LinkManager;
 
 public:
-    ~BluetoothLink();
+    BluetoothLink(SharedLinkConfigurationPtr& config);
+    virtual ~BluetoothLink();
 
     // Overrides from QThread
     void run(void) override;
@@ -147,7 +148,6 @@ private slots:
     void _writeBytes(const QByteArray bytes) override;
 
 private:
-    BluetoothLink(SharedLinkConfigurationPtr& config);
 
     // LinkInterface overrides
     bool _connect(void) override;
